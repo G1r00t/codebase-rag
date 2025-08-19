@@ -4,14 +4,15 @@
 ### Create a .env and save it in the root directory 
 .env structure
 ```
-OPENAI_API_KEY=your-openai-api-key-here
-FAISS_INDEX_PATH=faiss_index.bin
-VECTOR_DIMENSION=1536
-EMBEDDING_MODEL=text-embedding-ada-002
-RAG_MODEL=gpt-3.5-turbo
-RAG_TEMPERATURE=0.7
-RAG_MAX_TOKENS=1000
-RAG_TOP_K=5
-RAG_TOP_P=0.9
-DIRECTORY_TO_USE_RAG=/absolute/path/to/Rag-modules
+OPENAI_API_KEY=api key
+OPENAI_EMBEDDING_MODEL=text-embedding-ada-002
+OPENAI_CHAT_MODEL=gpt-4o
+WATCHED_DIR=directory to run rag on
+FAISS_INDEX_FILE=path to faiss index file
+EMBEDDING_DIM=1536  # Modify if you're using a different embedding model
+RAG_DISTANCE_METRIC=cosine
+HYBRID_SEARCH_ALPHA=0.7
+ENABLE_QUERY_EXPANSION=true
+ENABLE_LLM_RERANKING=true
+ENABLE_CODE_CHUNKING=false
 ```

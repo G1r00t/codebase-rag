@@ -2,10 +2,10 @@ import os
 import logging
 import atexit
 import warnings
-from Rag_modules.index import clear_index, add_to_index, save_index
-from Rag_modules.embeddings import generate_embeddings
-from Rag_modules.config import DIRECTORY_TO_USE_RAG
-from Rag_modules.monitor import start_monitoring, should_ignore_path
+from coderag.index import clear_index, add_to_index, save_index
+from coderag.embeddings import generate_embeddings
+from coderag.config import WATCHED_DIR
+from coderag.monitor import start_monitoring, should_ignore_path
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -17,7 +17,7 @@ def full_reindex():
     """Perform a full reindex of the entire codebase."""
     logging.info("Starting full reindexing of the codebase...")
     files_processed = 0
-    for root, _, files in os.walk(DIRECTORY_TO_USE_RAG):
+    for root, _, files in os.walk(WATCHED_DIR):
         if should_ignore_path(root):  # Check if the directory should be ignored
             logging.info(f"Ignoring directory: {root}")
             continue

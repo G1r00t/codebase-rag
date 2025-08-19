@@ -6,11 +6,11 @@ Simple CLI for CodeRAG - Query only (no indexing)
 import argparse
 import sys
 from openai import OpenAI
-from Rag_modules.config import OPENAI_KEY
+from coderag.config import OPENAI_API_KEY
 from prompt_flow import execute_rag_flow
 
 # Initialize the OpenAI client
-client = OpenAI(api_key=OPENAI_KEY)
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 def interactive_mode():
@@ -58,13 +58,14 @@ def main():
         description="CodeRAG CLI - Your Coding Assistant",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Examples:
-  %(prog)s                              # Interactive mode
-  %(prog)s -q "How to prevent SQL injection?"  # Single query
-  %(prog)s --query "Best practices for authentication"
-        """
+You can select the distance metric via CLI with --distance
+(choices: cosine, dot, euclidean), or set RAG_DISTANCE_METRIC in your .env config.
+"""
     )
-    
+    parser.add_argument(
+        '--distance', choices=["cosine", "dot", "euclidean"],
+        default=None, help="Distance metric for retrieval (overrides .env, shown in UI)"
+    )
     parser.add_argument(
         '-q', '--query',
         help='Single query to execute (non-interactive mode)'
